@@ -182,8 +182,6 @@ See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 This server indexes logs from the **Player History** DayZ mod and is consumed by the **Player History Web** admin client. Those live in sibling folders (`PlayerHistory`, `PlayerHistory_Web`) if you keep the three projects together.
 
-Do not commit `config.json`, `data/`, `dist/`, `release/`, or `node_modules/` — they are gitignored. Copy `config.example.json` to `config.json` for local setup.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
