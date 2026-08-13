@@ -1,0 +1,15 @@
+{
+  "playerHistoryPath": "",
+  "dbPath": "./data/player-history.db",
+  "host": "0.0.0.0",
+  "port": 3847,
+  "corsAllowAll": true,
+  "corsOrigins": ["http://localhost:5173", "http://127.0.0.1:5173"],
+  "publicBaseUrl": "http://YOUR_PUBLIC_IP_OR_DOMAIN:3847",
+  "serverName": "My DayZ Server",
+  "trustProxy": true,
+  "jwtSecret": "CHANGE-ME-use-long-random-string",
+  "accessTokenMinutes": 15,
+  "refreshTokenDays": 7,
+  "eventRetentionDays": 14
+}
