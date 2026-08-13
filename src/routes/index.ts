@@ -444,7 +444,7 @@ export function createRoutes(
       const from = req.query.from as string | undefined;
       const to = req.query.to as string | undefined;
       const limit = Math.min(parseInt(req.query.limit as string) || 8000, 20000);
-      const slim = req.query.slim !== '0' && req.query.slim !== 'false';
+      const slim = req.query.slim === '1' || req.query.slim === 'true';
       res.json(repo.getMapEvents(instanceId, param(req.params.steamid), from, to, limit, slim));
     } catch (err) {
       res.status(400).json({ error: String(err) });

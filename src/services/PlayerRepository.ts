@@ -373,11 +373,17 @@ export class PlayerRepository {
       params.push(to);
     }
 
-    const columns = slim
-      ? `timestamp, steam_id, event, category, session_id, player_name,
-         position_x, position_y, position_z, orientation, NULL as metadata_json`
-      : `timestamp, steam_id, event, category, session_id, player_name,
-         position_x, position_y, position_z, orientation, metadata_json`;
+    // Slim still keeps metadata on labelled events (ActionComplete, loot, combat).
+    // Only high-frequency trail noise omits it, so chips can show "Drink" not "Completed Action".
+    const metadataColumn = slim
+      ? `CASE WHEN event IN (
+           'PositionUpdate','PositionSnapshot','PlayerStateSnapshot','InventorySnapshot',
+           'ZombieHit','AnimalHit','ShotFired'
+         ) THEN NULL ELSE metadata_json END as metadata_json`
+      : 'metadata_json';
+
+    const columns = `timestamp, steam_id, event, category, session_id, player_name,
+         position_x, position_y, position_z, orientation, ${metadataColumn}`;
 
     const rows = db
       .prepare(

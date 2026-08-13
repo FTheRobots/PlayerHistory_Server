@@ -60,8 +60,19 @@ export function formatEventLabel(event: PlayerEvent): string {
   const meta = event.metadata ?? {};
   const base = EVENT_LABELS[event.event] ?? humanizeType(event.event);
 
-  if (event.event === 'ActionComplete' && meta.actionClass) {
-    return humanizeType(meta.actionClass.replace(/^Action/i, '')) || base;
+  if (
+    event.event === 'ActionComplete' ||
+    event.event === 'ActionStart' ||
+    event.event === 'ActionInterrupt'
+  ) {
+    const action = humanizeType(
+      (meta.actionClass ?? '').replace(/^Action/i, '').replace(/(CB|Continuous)$/i, '').trim()
+    );
+    const itemName = meta.itemDisplayName?.trim();
+    const target = meta.target ? humanizeType(meta.target) : '';
+    const detail = itemName && itemName !== 'Unknown' ? itemName : target;
+    if (action && detail) return `${action} — ${detail}`;
+    if (action) return action;
   }
 
   return base;

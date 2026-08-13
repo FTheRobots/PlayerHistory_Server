@@ -5,6 +5,7 @@
 First public source release of Player History Server.
 
 - Indexes Player History mod logs into SQLite
+- Map replay API keeps action metadata so the client can name completed actions
 - Authenticated REST + WebSocket API for the admin client
 - JWT auth with roles and per-user permission overrides
 - Optional CFTools Cloud enrichment (IDs, bans, GSM sessions)
